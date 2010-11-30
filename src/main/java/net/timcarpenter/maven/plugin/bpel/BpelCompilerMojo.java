@@ -40,6 +40,11 @@ public class BpelCompilerMojo extends AbstractMojo {
     private FileSet fileSet;
     
     /**
+     * @parameter
+     */
+    private boolean dryRun;
+    
+    /**
      * Compiles BPEL
      * @execute
      */
@@ -47,8 +52,6 @@ public class BpelCompilerMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         // Create a compiler.
         BpelC compiler = BpelC.newBpelCompiler();
-        // Don't write the output anywhere.
-        compiler.setDryRun(true);
         
         File dir = new File(fileSet.getDirectory());
         if (dir.isDirectory()) {
@@ -56,6 +59,12 @@ public class BpelCompilerMojo extends AbstractMojo {
             
             String includes = getCommaSeparatedList(fileSet.getIncludes());
             String excludes = getCommaSeparatedList(fileSet.getExcludes());
+            
+            if (dryRun) {
+                getLog().info("Dry run, not writing compilation output");
+                // Don't write the output anywhere.
+                compiler.setDryRun(true);
+            }
             
             try {
                 List<?> files = FileUtils.getFiles(dir, includes, excludes);
