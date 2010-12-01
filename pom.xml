@@ -23,8 +23,51 @@
     <artifactId>maven-bpel-compiler-plugin</artifactId>
     <version>0.1-SNAPSHOT</version>
     <name>BPEL Compiler Plugin for Maven</name>
-    <url>http://maven.apache.org</url>
+    <url>http://code.google.com/p/maven-bpel-compiler-plugin/</url>
+    <description>Plugin to compile BPEL processes during a Maven build</description>
     <packaging>maven-plugin</packaging>
+    <inceptionYear>2010</inceptionYear>
+    
+    <developers>
+        <developer>
+            <id>timc</id>
+            <email>timjohncarpenter@gmail.com</email>
+            <name>Tim Carpenter</name>
+            <roles>
+                <role>Adminstrator</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>8</timezone>
+        </developer>
+    </developers>
+    
+    <scm>
+        <connection>scm:svn:http://maven-bpel-compiler-plugin.googlecode.com/svn/trunk/</connection>
+        <developerConnection>scm:svn:https://maven-bpel-compiler-plugin.googlecode.com/svn/trunk/</developerConnection>
+        <tag>HEAD</tag>
+        <url>http://code.google.com/p/maven-bpel-compiler-plugin/source/browse/</url>
+    </scm>
+    
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
+    
+    <issueManagement>
+        <system>Google Code</system>
+        <url>http://code.google.com/p/maven-bpel-compiler-plugin/issues/list</url>
+    </issueManagement>
+
+    <distributionManagement>
+        <site>
+            <id>GoogleCode</id>
+            <name>GoogleCode - SVN</name>
+            <url>scm:svn:https://maven-bpel-compiler-plugin.googlecode.com/svn/site</url>
+        </site>
+    </distributionManagement>
+    
     <build>
         <plugins>
             <plugin>
@@ -37,7 +80,27 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <!-- For scm deployment -->
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-scm</artifactId>
+                <version>1.0-beta-6</version>
+            </extension>
+            <extension>
+                <groupId>org.apache.maven.scm</groupId>
+                <artifactId>maven-scm-manager-plexus</artifactId>
+                <version>1.0</version>
+            </extension>
+            <extension>
+                <groupId>org.apache.maven.scm</groupId>
+                <artifactId>maven-scm-provider-svnexe</artifactId>
+                <version>1.0</version>
+            </extension>
+        </extensions>
     </build>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
